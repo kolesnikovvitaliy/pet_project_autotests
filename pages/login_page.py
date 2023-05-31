@@ -13,8 +13,6 @@ class LoginPage(BasePage):
         self.should_be_register_form()
 
     def should_be_login_url(self):
-        self.browser.find_element(*MainPageLocators.LOGIN_LINK).click()
-        self.url = self.browser.current_url
         assert "login" in self.url, "url is not activ"
    
     def should_be_login_form(self):
