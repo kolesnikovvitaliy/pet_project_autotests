@@ -8,6 +8,7 @@ from .product_page import PageObject
 class CartPage(BasePage):
     def should_be_cart_page(self):
         # self.should_be_cart_page_url()
+        #self.should_not_be_success_message()
         self.should_be_name_product()
         self.should_be_price_product()
 
@@ -40,3 +41,11 @@ class CartPage(BasePage):
         print("name_product_on_product_page : ", name_product_on_product_page)
         print("name_product_on_cart_page : ", self.get_name_poduct_on_cart_page())
         assert name_product_on_product_page == self.get_name_poduct_on_cart_page(), "Название товара на product_page с товаром на странице cart_page не совпадает"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*CartPageLocators.SUCCESS_MESSAGE), \
+        "Success message is presented, but should not be"
+
+    def should_not_be_success_message(self):
+        assert self.is_disappeared(*CartPageLocators.SUCCESS_MESSAGE), \
+        "Success message is presented, but should not be"

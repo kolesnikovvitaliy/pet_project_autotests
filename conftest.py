@@ -1,6 +1,6 @@
 import pytest
 from selenium import webdriver
-# from selenium.webdriver.common.by import By
+from selenium.webdriver.common.by import By
 
 
 def pytest_addoption(parser):
@@ -17,7 +17,7 @@ def browser(request):
     if browser_name == "chrome":
         print("\nstart chrome browser for test..")
         options = webdriver.ChromeOptions()
-        # options.add_argument("--headless")
+        #options.add_argument("--headless") # Браузер запускается в фоновом режиме
         options.add_experimental_option("excludeSwitches", ["enable-automation"])
         options.add_experimental_option('useAutomationExtension', False)
         options.add_experimental_option('prefs', {'intl.accept_languages': user_language})

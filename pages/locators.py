@@ -1,19 +1,30 @@
 from selenium.webdriver.common.by import By
 
+class BasePageLocators():
+    BASKET_LINK = (By.CSS_SELECTOR, '.basket-mini .btn-default:nth-child(1)')
+    LOGIN_LINK = (By.CSS_SELECTOR, '#login_link')
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
 
-class MainPageLocators():
-    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
-
-class LoinPageLocators():
-    LOGIN_FORM = (By.CSS_SELECTOR, "#login_form")
-    REGISTER_FORM = (By.CSS_SELECTOR, "#register_form")
+class LoginPageLocators():
+    LOGIN_FORM = (By.CLASS_NAME,'login_form')
+    REGISTER_FORM = (By.CLASS_NAME,'register_form')
+    EMAIL_FIELD = (By.NAME,'registration-email')
+    PASSWORD_FIELD = (By.NAME,'registration-password1')
+    REPEAT_PASSWORD_FIELD = (By.NAME,'registration-password2')
+    REGISTRATION_BUTTON = (By.NAME,'registration_submit')
 
 class ProductPageLocators():
-    ADD_CART_LINK = (By.CSS_SELECTOR, ".btn.btn-lg.btn-primary.btn-add-to-basket")
-    PRODUCT_NAME_IN_PRODUCT_PAGE = (By.CSS_SELECTOR, ".col-sm-6.product_main h1")
-    PRODUCT_PRICE_IN_PRODUCT_PAGE = (By.CSS_SELECTOR, ".col-sm-6.product_main p.price_color")
-
-class CartPageLocators():
-    PRODUCT_NAME_IN_CART_PAGE = (By.CSS_SELECTOR, ".alertinner strong")
-    PRODUCT_PRICE_IN_CART_PAGE = (By.CSS_SELECTOR, ".alertinner p strong")
+    ADD_TO_CART_BUTTON = (By.CLASS_NAME, 'btn-add-to-basket')
+    PRODUCT_PAGE_PRICE = (By.CSS_SELECTOR, 'p.price_color')
+    PRODUCT_PAGE_NAME = (By.CSS_SELECTOR, '.product_main h1')
+    ADD_TO_CART_PRODUCT_NAME = (By.CSS_SELECTOR, '.alert-success:nth-child(1) .alertinner strong')
+    ADD_TO_CART_PRICE = (By.CSS_SELECTOR, '.alert-info strong')
+    SUCCESS_MESSAGE = (By.CSS_SELECTOR, '.alert-success:nth-child(1) div.alertinner')
+   
+class BasketPageLocators():
+    BASKET_ITEM = (By.CSS_SELECTOR, '.basket-items')
+    BASKET_NO_ITEMS_MESSAGE = (By.CSS_SELECTOR, '#content_inner p')
+    
+    
     

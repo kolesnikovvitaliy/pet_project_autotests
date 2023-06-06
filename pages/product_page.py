@@ -1,37 +1,34 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
 
-
-
-class PageObject(BasePage):
-    def should_be_product_page(self):
-        # self.should_be_product_page_url()
-        self.should_be_product_name_in_product_page()
-        self.should_be_product_price_in_product_page()
-        self.should_be_add_cart_link()
-        
-
-    # def should_be_product_page_url(self):
-    #     assert "?promo=newYear" in self.url, "url product_page is not activ"
-
-    def should_be_product_name_in_product_page(self):      
-         assert self.is_element_present(*ProductPageLocators.PRODUCT_PRICE_IN_PRODUCT_PAGE), "name_product in product_page not present"
+class ProductPage(BasePage):
+    def add_item_to_cart(self):
+        button = self.browser.find_element(*ProductPageLocators.ADD_TO_CART_BUTTON)
+        button.click()
     
-    def should_be_product_price_in_product_page(self):      
-         assert self.is_element_present(*ProductPageLocators.PRODUCT_PRICE_IN_PRODUCT_PAGE), "price_product in product_page not present"
+    def product_price_is_displayed_correctly(self):
+        product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PAGE_PRICE).text
+        product_cart_price = self.browser.find_element(*ProductPageLocators.ADD_TO_CART_PRICE).text
+        assert self.elements_are_equal(product_price, product_cart_price), 'Prices are different in cart and product page'
     
-    def should_be_add_cart_link(self):
-        assert self.is_element_present(*ProductPageLocators.ADD_CART_LINK), "Add_cart link is not presented"
-
-    def get_to_product_name_in_product_page(self):
-        return self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_IN_PRODUCT_PAGE).text
+    def product_is_added_with_correct_message(self):
+        product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_PAGE_NAME).text
+        product_cart_name = self.browser.find_element(*ProductPageLocators.ADD_TO_CART_PRODUCT_NAME).text
+        assert self.elements_are_equal(product_name, product_cart_name), 'Names are different in cart and product page'
+     
+    
+    def success_message_is_not_present_after_adding_product_to_basket(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE),\
+               'Success message is present after adding product to cart'
         
-    def get_to_product_price_in_product_page(self):
-        return self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE_IN_PRODUCT_PAGE).text
-
-    def go_to_cart_page(self):
-        link = self.browser.find_element(*ProductPageLocators.ADD_CART_LINK)
-        link.click() 
-
-   
+    def success_message_should_not_be_seen_without_adding_product_to_cart(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE),\
+               'Success message is present on product page, but it should not'
+        
+    def success_message_disappeared_after_adding_product_to_cart(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE),\
+               'Success message dissapear after adding product to cart'
+        
+    
+    
 
